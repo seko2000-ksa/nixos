@@ -21,7 +21,7 @@ let
     curl
     tree
     eza
-    ghostty
+    #ghostty
     alacritty
     fastfetch
     starship
