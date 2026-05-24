@@ -43,6 +43,7 @@ let
     unzip
     parallel
     future-cursors
+    obsidian
   ];
 
   devPackages = with pkgs; [
@@ -52,9 +53,6 @@ let
     rustlings
     terraform
     distrobox
-    nixd
-    neovim
-    alejandra
   ];
 
   appsPackages = with pkgs; [

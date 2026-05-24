@@ -22,10 +22,10 @@
 
     lazyvim.url = "github:pfassina/lazyvim-nix";
     lazyvim.inputs.nixpkgs.follows = "nixpkgs-stable";
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    #nixvim = {
+    #  url = "github:nix-community/nixvim";
+    #  inputs.nixpkgs.follows = "nixpkgs-unstable";
+    #};
 
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
 
@@ -41,7 +41,7 @@
       home-managerU,
       home-managerS,
       noctalia,
-      nixvim,
+      #nixvim,
       lazyvim,
       flatpaks,
       disko,
@@ -133,6 +133,7 @@
             ./home/common.nix
             ./home/zsh.nix
             ./home/niri.nix
+            ./home/lazyvim.nix
           ];
         };
 

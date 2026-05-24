@@ -45,6 +45,6 @@
     "fastfetch/violet.png".source = ../config/icons/violet.png;
     "qt5ct/qt5ct.conf".source = ../config/qt5ct/qt5ct.conf;
     "qt5ct/colors/noctalia.conf".source = ../config/qt5ct/colors/noctalia.conf;
-    "nvim".source = ../config/nvim;
+    "nvim/".source = ../config/nvim;
   };
 }
