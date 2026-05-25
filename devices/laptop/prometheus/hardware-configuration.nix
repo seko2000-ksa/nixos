@@ -13,6 +13,10 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  boot.consoleLogLevel = 0;
+  boot.initrd.verbose = false;
+  boot.kernelParams = [ "quiet" "splash" ];
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/358e68e1-3ba4-4c12-bba7-35715831b5e1";
       fsType = "btrfs";

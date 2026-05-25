@@ -16,16 +16,17 @@ let
     far2l
     zoxide
     jq
+    grim
+    slurp
+    satty
     poppler
     fd
     curl
     tree
     eza
-    ghostty
     alacritty
     fastfetch
-    starship
-    lazyssh
+    #starship
     lazygit
     nixfmt
     blueman
@@ -37,13 +38,16 @@ let
     pciutils
     file
     dig
-    oh-my-zsh
+    #oh-my-zsh
     autojump
     screen
     unzip
     parallel
     future-cursors
     obsidian
+    statix
+    maestral
+    maestral-gui
   ];
 
   devPackages = with pkgs; [
@@ -61,7 +65,6 @@ let
     discord
     chromium
     #libreoffice
-    feishin
     picard
     gnome-calculator
   ];

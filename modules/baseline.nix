@@ -57,7 +57,6 @@ in
     services.udisks2.enable = true;
 
     networking.networkmanager.enable = true;
-
     nix.gc = {
       automatic = true;
       dates = "weekly";
