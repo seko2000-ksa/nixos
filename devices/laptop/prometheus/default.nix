@@ -10,7 +10,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../../modules/baseline.nix # <-- shared config between laptop/desktop
-    ../../../modules/flatpak.nix
+    #../../../modules/flatpak.nix
     ../../../modules/niri.nix #     <-- niri environment
     ../../../modules/storagebox.nix
     ../../../modules/retroshare.nix
@@ -41,19 +41,32 @@
     #kde.enable= false;
     polkit.enable = true;
     yazi.enable = true;           # yazi
-    #virtualization.enable = true; # enable QEMU/KVM virtualization
-    flatpak = {
-      enable = true;
-      onCalendar = "weekly";
-      packages = [
-        "flathub:app/app.zen_browser.zen//stable"
-        "flathub:app/com.github.tchx84.Flatseal//stable"
-      ];
-    };
+    virtualization.enable = true; # enable QEMU/KVM virtualization
+    #flatpak = {
+    #  enable = true;
+    #  onCalendar = "weekly";
+    #  packages = [
+    #    "flathub:app/app.zen_browser.zen//stable"
+    #    "flathub:app/com.github.tchx84.Flatseal//stable"
+    #  ];
+    #};
   };
+
+  programs.nix-ld.enable = true;
+ 
+ # Add any shared libraries your unpatched binaries require
+  programs.nix-ld.libraries = with pkgs; [
+    glibc
+    stdenv.cc.cc
+    openssl
+   ];
 
   environment.systemPackages = with pkgs; [
     v4l-utils
     udiskie
+    dnsmasq
+    udev
+    #pkgs.nur.repos.dcsunset.ogatak
+    #pkgs.nur.repos.foolnotion.q5go
   ];
 }

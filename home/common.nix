@@ -22,7 +22,7 @@
           core.editor = "nvim";
       };
   };
-
+  
   #programs.starship = {
   #  enable = true;
   #  enableZshIntegration = true;
@@ -47,5 +47,18 @@
     "qt5ct/qt5ct.conf".source = ../config/qt5ct/qt5ct.conf;
     "qt5ct/colors/noctalia.conf".source = ../config/qt5ct/colors/noctalia.conf;
     #"nvim/".source = ../config/nvim;
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "application/pdf" = ["org.gnome.Evince.desktop"];
+      "image/*" = ["imv"];
+    };
+
+    defaultApplications = {
+      "application/pdf" = ["org.gnome.Evince.desktop"];
+      "image/*" = ["imv"];
+    };
   };
 }

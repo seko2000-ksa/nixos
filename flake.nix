@@ -21,16 +21,21 @@
     };
 
     lazyvim.url = "github:pfassina/lazyvim-nix";
-    lazyvim.inputs.nixpkgs.follows = "nixpkgs-stable";
+    lazyvim.inputs.nixpkgs.follows = "nixpkgs-unstable";
     #nixvim = {
     #  url = "github:nix-community/nixvim";
     #  inputs.nixpkgs.follows = "nixpkgs-unstable";
     #};
 
-    flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
+    #flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs-stable";
+
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -43,8 +48,9 @@
       noctalia,
       #nixvim,
       lazyvim,
-      flatpaks,
+      #flatpaks,
       disko,
+      nur,
       ...
     }@inputs:
     let
@@ -60,7 +66,8 @@
           modules = [
             deviceModule
             home-managerU.nixosModules.home-manager
-            flatpaks.nixosModules.default
+            nur.modules.nixos.default
+            #flatpaks.nixosModules.default
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -94,6 +101,7 @@
             ./modules/baseline.server.nix
             ./modules/ssh.nix
             home-managerS.nixosModules.home-manager
+            nur.modules.nixos.default
             {
               home-manager = {
                 useGlobalPkgs = true;

@@ -32,6 +32,7 @@ in
     hardware.enableAllFirmware = true;
     hardware.graphics = {
       enable = true;
+      enable32Bit = true;
     };
     
     # Configure the NVIDIA driver
@@ -56,16 +57,39 @@ in
     services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
     services.udisks2.enable = true;
 
-    networking.networkmanager.enable = true;
+    networking.networkmanager = {
+      enable = true;
+      plugins = with pkgs; [
+        #networkmanager-fortisslvpn
+        #networkmanager-iodine
+        #networkmanager-l2tp
+        networkmanager-openconnect
+        networkmanager-openvpn
+        #networkmanager-sstp
+        #networkmanager-strongswan
+        networkmanager-vpnc
+      ];
+    };
+
+    programs = {
+      nm-applet = {
+        enable = true;
+        indicator = true;
+        package = pkgs.networkmanagerapplet;
+      };
+    };
+
     nix.gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
 
-    time.timeZone = "Europa/Moscow";
+    time.hardwareClockInLocalTime = true;
+
+    time.timeZone = "Europe/Moscow";
     services.xserver.xkb = {
-      layout = "us,ru";
+      layout = "us,ru,tr";
       options = "grp:caps_toggle";
     };
     
@@ -133,10 +157,16 @@ in
       fontDir.enable = true;
     };
 
-    programs.dconf.enable = true;
+    programs.evince.enable = true;
 
     programs.zsh.enable = true;
     environment.pathsToLink = [ "/share/zsh" ];
+    programs.nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3";
+      flake = "/home/ksa/nixos"; # sets NH_OS_FLAKE variable for you
+    };
 
     services = {
       pcscd.enable = true; # yubikey dep
@@ -153,6 +183,39 @@ in
     
     xdg.portal.enable = true;
     xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+#systemd.user.services."network-manager-applet" = {
+#    enable = true;
+#    description = "Start the network manager applet";
+#    wantedBy = [ "default.target" ];
+#    serviceConfig.Type = "forking";
+#    serviceConfig.Restart = "always";
+#    serviceConfig.RestartSec = 2;
+#    serviceConfig.ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+#    environment = {
+#       XDG_DATA_DIRS = "${pkgs.networkmanagerapplet}/bin/nm-applet/share";
+#    };
+#  };
+
+ #systemd.user.services.dropbox = {
+ #   description = "Dropbox";
+ #   wantedBy = [ "graphical-session.target" ];
+ #   environment = {
+ #     QT_PLUGIN_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtPluginPrefix;
+ #     QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
+ #   };
+ #   serviceConfig = {
+ #     ExecStart = "${pkgs.dropbox.out}/bin/dropbox";
+ #     ExecReload = "${pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
+ #     KillMode = "control-group"; # upstream recommends process
+ #     Restart = "on-failure";
+ #     PrivateTmp = true;
+ #     ProtectSystem = "full";
+ #     Nice = 10;
+ #   };
+ # };
+
+ #   systemd.user.services.dropbox.enable = true;
 
     system.stateVersion = "25.11";
   };

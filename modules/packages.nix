@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  nur,
   ...
 }:
 let
@@ -19,7 +20,9 @@ let
     grim
     slurp
     satty
+    typst
     poppler
+    ledger
     fd
     curl
     tree
@@ -41,13 +44,21 @@ let
     #oh-my-zsh
     autojump
     screen
+    openssl
+    openssh
+    glow
     unzip
     parallel
+    superfile
     future-cursors
     obsidian
     statix
+    imv
     maestral
     maestral-gui
+    docker
+    docker-compose
+    #vpnc
   ];
 
   devPackages = with pkgs; [
@@ -57,16 +68,26 @@ let
     rustlings
     terraform
     distrobox
+    evolution 
+    python314
+    SDL2
+    SDL2.dev
+    SDL2_image
+    SDL2_ttf
+    SDL2_mixer
   ];
 
   appsPackages = with pkgs; [
-    vlc
+    mpv
     telegram-desktop
     discord
     chromium
     #libreoffice
-    picard
+    #picard
+    evince
     gnome-calculator
+    evolution-ews
+    katago
   ];
 in
 {

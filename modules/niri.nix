@@ -25,7 +25,6 @@ in
       swayimg
       rose-pine-cursor
       papirus-icon-theme
-      nemo
       fuzzel
       gpu-screen-recorder
       wl-clipboard
