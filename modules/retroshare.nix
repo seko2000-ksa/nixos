@@ -1,8 +1,11 @@
-{ config, lib, pkgs, ... }:
-let
-  cfg = config.workstation.retroshare;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.workstation.retroshare;
+in {
   options.workstation.retroshare.enable =
     lib.mkEnableOption "Syncthing RetroArch share";
 
@@ -27,19 +30,19 @@ in
           "retro-bios" = {
             id = "p4epq-mmgmv";
             path = "/home/ksa/sync/retro/BIOS";
-            devices = [ "manga" ];
+            devices = ["manga"];
             type = "receiveonly";
           };
           "retro-roms" = {
             id = "74edp-unucu";
             path = "/home/ksa/sync/retro/ROMs";
-            devices = [ "manga" ];
+            devices = ["manga"];
             type = "receiveonly";
           };
           "retro-saves" = {
             id = "ymtp3-m4ngw";
             path = "/home/ksa/sync/retro/Saves";
-            devices = [ "manga" ];
+            devices = ["manga"];
             type = "sendreceive";
           };
         };

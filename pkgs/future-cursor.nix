@@ -26,6 +26,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     homepage = "https://github.com/yeyushengfan258/Future-cursors";
     license = lib.licenses.gpl3Only;
     platforms = lib.platforms.linux;
-    maintainers = with lib.maintainers; [ epic9491 ];
+    maintainers = with lib.maintainers; [epic9491];
   };
 })

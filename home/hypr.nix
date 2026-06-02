@@ -3,10 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-
-{
-
+}: {
   xdg.configFile."hypr" = {
     source = ../config/hypr;
     recursive = true;
@@ -63,5 +60,4 @@
       obs-vkcapture
     ];
   };
-
 }

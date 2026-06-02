@@ -1,8 +1,15 @@
-{ config, inputs, ... }:
 {
+  config,
+  inputs,
+  ...
+}: {
   containers.uptime = {
     autoStart = true;
-    config = { config, pkgs, ... }: {
+    config = {
+      config,
+      pkgs,
+      ...
+    }: {
       system.stateVersion = "25.11";
       nixpkgs.overlays = [
         (final: prev: {

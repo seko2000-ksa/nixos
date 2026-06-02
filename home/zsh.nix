@@ -4,9 +4,7 @@
   lib,
   hostName,
   ...
-}:
-
-{
+}: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -35,9 +33,9 @@
     oh-my-zsh = {
       enable = true;
       package = pkgs.oh-my-zsh;
-      #custom = "$HOME/.oh-my-custom";
-      theme = "agnoster";
-      plugins = [ "git" "z" "docker" "docker-compose" "eza" "fzf" ];
+      custom = "/home/ksa/.oh-my-custom";
+      theme = "lcars";
+      plugins = ["git" "z" "docker" "docker-compose" "eza" "fzf"];
     };
   };
 }

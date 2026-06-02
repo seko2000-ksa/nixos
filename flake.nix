@@ -38,153 +38,153 @@
     };
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs-unstable,
-      nixpkgs-stable,
-      home-managerU,
-      home-managerS,
-      noctalia,
-      #nixvim,
-      lazyvim,
-      #flatpaks,
-      disko,
-      nur,
-      ...
-    }@inputs:
-    let
-      system = "x86_64-linux";
-      libU = nixpkgs-unstable.lib;
-      libS = nixpkgs-stable.lib;
+  outputs = {
+    self,
+    nixpkgs-unstable,
+    nixpkgs-stable,
+    home-managerU,
+    home-managerS,
+    noctalia,
+    #nixvim,
+    lazyvim,
+    #flatpaks,
+    disko,
+    nur,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    libU = nixpkgs-unstable.lib;
+    libS = nixpkgs-stable.lib;
 
-      mkWorkstation =
-        { deviceModule, hmImports }:
-        libU.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            deviceModule
-            home-managerU.nixosModules.home-manager
-            nur.modules.nixos.default
-            #flatpaks.nixosModules.default
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "backup";
-                extraSpecialArgs = { inherit inputs; };
-                sharedModules = [
-                  (
-                    { osConfig, ... }:
-                    {
-                      _module.args.hostName = osConfig.networking.hostName;
-                    }
-                  )
-                ];
-                users.ksa = {
-                  imports = hmImports;
-                };
+    mkWorkstation = {
+      deviceModule,
+      hmImports,
+    }:
+      libU.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs;};
+        modules = [
+          deviceModule
+          home-managerU.nixosModules.home-manager
+          nur.modules.nixos.default
+          #flatpaks.nixosModules.default
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              extraSpecialArgs = {inherit inputs;};
+              sharedModules = [
+                (
+                  {osConfig, ...}: {
+                    _module.args.hostName = osConfig.networking.hostName;
+                  }
+                )
+              ];
+              users.ksa = {
+                imports = hmImports;
               };
-            }
-          ];
-        };
+            };
+          }
+        ];
+      };
 
-      mkServer =
-        { deviceModule, hmImports }:
-        libS.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            deviceModule
-            disko.nixosModules.disko
-            ./modules/baseline.server.nix
-            ./modules/ssh.nix
-            home-managerS.nixosModules.home-manager
-            nur.modules.nixos.default
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "backup";
-                extraSpecialArgs = { inherit inputs; };
-                sharedModules = [
-                  (
-                    { osConfig, ... }:
-                    {
-                      _module.args.hostName = osConfig.networking.hostName;
-                    }
-                  )
-                ];
-                users.ksa = {
-                  imports = hmImports;
-                };
+    mkServer = {
+      deviceModule,
+      hmImports,
+    }:
+      libS.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs;};
+        modules = [
+          deviceModule
+          disko.nixosModules.disko
+          ./modules/baseline.server.nix
+          ./modules/ssh.nix
+          home-managerS.nixosModules.home-manager
+          nur.modules.nixos.default
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              extraSpecialArgs = {inherit inputs;};
+              sharedModules = [
+                (
+                  {osConfig, ...}: {
+                    _module.args.hostName = osConfig.networking.hostName;
+                  }
+                )
+              ];
+              users.ksa = {
+                imports = hmImports;
               };
-            }
-          ];
-        };
-    in
-    {
-      nixosConfigurations = {
-        erebos = mkWorkstation {
-          deviceModule = ./devices/desktop/erebos/default.nix;
-          hmImports = [
-            ./home/common.nix
-            ./home/zsh.nix
-            ./home/kde.nix
-          ];
-        };
+            };
+          }
+        ];
+      };
+  in {
+    formatter.x86_64-linux = nixpkgs-unstable.legacyPackages.x86_64-linux.alejandra;
+    nixosConfigurations = {
+      erebos = mkWorkstation {
+        deviceModule = ./devices/desktop/erebos/default.nix;
+        hmImports = [
+          ./home/common.nix
+          ./home/zsh.nix
+          ./home/kde.nix
+        ];
+      };
 
-        prometheus = mkWorkstation {
-          deviceModule = ./devices/laptop/prometheus/default.nix;
-          hmImports = [
-            ./home/common.nix
-            ./home/zsh.nix
-            ./home/niri.nix
-            ./home/lazyvim.nix
-          ];
-        };
+      prometheus = mkWorkstation {
+        deviceModule = ./devices/laptop/prometheus/default.nix;
+        hmImports = [
+          ./home/common.nix
+          ./home/zsh.nix
+          ./home/niri.nix
+          ./home/lazyvim.nix
+        ];
+      };
 
-        null = mkWorkstation {
-          deviceModule = ./devices/desktop/null/default.nix;
-          hmImports = [
-            ./home/common.nix
-            ./home/zsh.nix
-            ./home/kde.nix
-          ];
-        };
+      null = mkWorkstation {
+        deviceModule = ./devices/desktop/null/default.nix;
+        hmImports = [
+          ./home/common.nix
+          ./home/zsh.nix
+          ./home/kde.nix
+        ];
+      };
 
-        # steamos build is still in testing, expect major changes and broken functionality
-        steamos = mkWorkstation {
-          deviceModule = ./devices/desktop/dionysus/default.nix;
-          hmImports = [
-            ./home/steam.nix
-          ];
-        };
+      # steamos build is still in testing, expect major changes and broken functionality
+      steamos = mkWorkstation {
+        deviceModule = ./devices/desktop/dionysus/default.nix;
+        hmImports = [
+          ./home/steam.nix
+        ];
+      };
 
-        void = mkServer {
-          deviceModule = ./devices/server/void/default.nix;
-          hmImports = [
-            ./home/server.nix
-            ./home/zsh.nix
-          ];
-        };
+      void = mkServer {
+        deviceModule = ./devices/server/void/default.nix;
+        hmImports = [
+          ./home/server.nix
+          ./home/zsh.nix
+        ];
+      };
 
-        v-gaia-main = mkServer {
-          deviceModule = ./devices/server/v-gaia-main/default.nix;
-          hmImports = [
-            ./home/server.nix
-            ./home/zsh.nix
-          ];
-        };
+      v-gaia-main = mkServer {
+        deviceModule = ./devices/server/v-gaia-main/default.nix;
+        hmImports = [
+          ./home/server.nix
+          ./home/zsh.nix
+        ];
+      };
 
-        zeus = mkServer {
-          deviceModule = ./devices/server/zeus/default.nix;
-          hmImports = [
-            ./home/server.nix
-            ./home/zsh.nix
-          ];
-        };
+      zeus = mkServer {
+        deviceModule = ./devices/server/zeus/default.nix;
+        hmImports = [
+          ./home/server.nix
+          ./home/zsh.nix
+        ];
       };
     };
+  };
 }

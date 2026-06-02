@@ -4,9 +4,7 @@
   pkgs,
   modulesPath,
   ...
-}:
-
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../../modules/nixvim.nix
@@ -17,7 +15,7 @@
 
   boot.loader.grub = {
     enable = true;
-    devices = [ "/dev/sda" ];
+    devices = ["/dev/sda"];
   };
 
   users.users.ksa = {
@@ -34,7 +32,7 @@
     ];
   };
 
-  age.identityPaths = [ "/home/ksa/.ssh/id_ed25519" ];
+  age.identityPaths = ["/home/ksa/.ssh/id_ed25519"];
 
   networking.hostName = "void";
 

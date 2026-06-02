@@ -3,8 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   services.kavita = {
     enable = true;
     user = "kavita";
@@ -30,6 +29,6 @@
   };
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 5000 ];
+    allowedTCPPorts = [5000];
   };
 }

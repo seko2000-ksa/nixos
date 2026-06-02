@@ -4,15 +4,12 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cfg = config.workstation.virtualization;
-in
-{
+in {
   options.workstation.virtualization.enable = lib.mkEnableOption "Enable virtualization support for libvirt qemu/kvm";
 
   config = lib.mkIf cfg.enable {
-
     programs.virt-manager.enable = true;
     virtualisation = {
       libvirtd = {

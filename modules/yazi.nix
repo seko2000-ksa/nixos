@@ -1,14 +1,12 @@
-{ config
-, lib
-, pkgs
-, inputs
-, ...
-}:
-let
-  cfg = config.workstation.yazi;
-in
 {
-
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: let
+  cfg = config.workstation.yazi;
+in {
   options.workstation.yazi.enable =
     lib.mkEnableOption "Yazi configuration";
 

@@ -1,9 +1,11 @@
-{ config, pkgs, lib, ... }:
-
-let
-  nixIconPath = "${config.xdg.dataHome}/icons/nix/nix-icon.svg";
-in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  nixIconPath = "${config.xdg.dataHome}/icons/nix/nix-icon.svg";
+in {
   gtk = {
     enable = true;
     theme = {

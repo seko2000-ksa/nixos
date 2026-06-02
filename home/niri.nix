@@ -4,16 +4,18 @@
   lib,
   hostName,
   ...
-}:
-let
-  niriConfig = if hostName == "prometheus" 
-    then ../config/niri/config.laptop.kdl 
+}: let
+  niriConfig =
+    if hostName == "prometheus"
+    then ../config/niri/config.laptop.kdl
     else ../config/niri/config.desktop.kdl;
-in
-{
+in {
   gtk = {
     enable = true;
-    theme = { name = "Adwaita-dark"; package = pkgs.gnome-themes-extra; };
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
     colorScheme = "dark";
     gtk3.colorScheme = "dark";
     gtk4.colorScheme = "dark";
@@ -23,13 +25,13 @@ in
       package = pkgs.papirus-icon-theme;
     };
 
-#    gtk3.extraConfig = {
- #     "gtk-application-prefer-dark-theme" = 1;
- #   };
+    #    gtk3.extraConfig = {
+    #     "gtk-application-prefer-dark-theme" = 1;
+    #   };
 
-#    gtk4.extraConfig = {
-#      "gtk-application-prefer-dark-theme" = 1;
-#    };
+    #    gtk4.extraConfig = {
+    #      "gtk-application-prefer-dark-theme" = 1;
+    #    };
   };
 
   qt = {

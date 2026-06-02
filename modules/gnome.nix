@@ -4,11 +4,9 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cfg = config.workstation.gnome;
-in
-{
+in {
   options.workstation.gnome.enable = lib.mkEnableOption "GNOME-based workstation environment";
 
   config = lib.mkIf cfg.enable {

@@ -3,12 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-
-let
+}: let
   cfg = config.workstation.flatpak;
-in
-{
+in {
   options.workstation.flatpak = {
     enable = lib.mkEnableOption "Flatpak configuration";
 
@@ -22,7 +19,7 @@ in
 
     packages = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ ];
+      default = [];
       description = "Flatpak(s) to install";
       example = [
         "flathub:app/org.kde.index//stable"
@@ -35,26 +32,26 @@ in
         lib.types.attrsOf (
           lib.types.attrsOf (
             lib.types.either
-              (lib.types.listOf (
-                lib.types.oneOf [
-                  lib.types.str
-                  lib.types.number
-                  lib.types.path
-                  lib.types.attrs
-                ]
-              ))
-              (
-                lib.types.oneOf [
-                  lib.types.str
-                  lib.types.number
-                  lib.types.path
-                  lib.types.attrs
-                ]
-              )
+            (lib.types.listOf (
+              lib.types.oneOf [
+                lib.types.str
+                lib.types.number
+                lib.types.path
+                lib.types.attrs
+              ]
+            ))
+            (
+              lib.types.oneOf [
+                lib.types.str
+                lib.types.number
+                lib.types.path
+                lib.types.attrs
+              ]
+            )
           )
         )
       );
-      default = { };
+      default = {};
       description = "Flatpak overrides";
     };
 

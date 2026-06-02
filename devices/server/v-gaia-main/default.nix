@@ -5,8 +5,7 @@
   modulesPath,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     ./backup.nix
@@ -18,7 +17,7 @@
     ../../../modules/nixvim.nix
   ];
 
-  age.identityPaths = [ "/home/ksa/.ssh/id_ed25519" ];
+  age.identityPaths = ["/home/ksa/.ssh/id_ed25519"];
 
   users.users.ksa = {
     isNormalUser = true;
@@ -50,5 +49,4 @@
     ssh.enable = true;
     nixvim.enable = true;
   };
-
 }

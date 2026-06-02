@@ -5,9 +5,7 @@
   modulesPath,
   inputs,
   ...
-}:
-
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     ./disko.nix
@@ -16,7 +14,7 @@
     ../../../modules/virtualization.nix
   ];
 
-  age.identityPaths = [ "/home/ksa/.ssh/id_ed25519" ];
+  age.identityPaths = ["/home/ksa/.ssh/id_ed25519"];
 
   users.users.ksa = {
     isNormalUser = true;
@@ -41,8 +39,8 @@
   };
 
   hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = false;  
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia.open = false;
 
   networking.hostName = "zeus";
 

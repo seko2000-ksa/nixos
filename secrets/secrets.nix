@@ -4,23 +4,22 @@ let
   void = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsDNzlcgZCCLp8lD3lfXJ7meW8j5mnxlI1uBQ63V/J6 gumbo@void";
   v-gaia-main = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDfwt9c7HbYBwgwGrEZBXDjvvajvAz4ubOEdpWobFntB gumbo@v-gaia-main";
   null = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKf4hUmWlIiN8/+rLyZEqqhhBKNS08dEFGL6ix47Fjko gumbo@null";
-  systems = [ prometheus erebos void ];
-  workstations = [ prometheus erebos ];
-in
-{
+  systems = [prometheus erebos void];
+  workstations = [prometheus erebos];
+in {
   "test.age".publicKeys = systems;
   "matrix.env".publicKeys = systems;
   "tuwunel-token.age".publicKeys = systems;
   "gumbo.age".publicKeys = workstations;
   # borg secrets
-  "borg.prometheus.age".publicKeys = [ prometheus ];
+  "borg.prometheus.age".publicKeys = [prometheus];
   "borg.erebos.age".publicKeys = workstations;
-  "borg.void.age".publicKeys = [ prometheus void ];
-  "borg.v-gaia-main.age".publicKeys = workstations ++ [ v-gaia-main ];
+  "borg.void.age".publicKeys = [prometheus void];
+  "borg.v-gaia-main.age".publicKeys = workstations ++ [v-gaia-main];
   #v-gaia-main secrets
-  "newt.env.age".publicKeys = workstations ++ [ v-gaia-main ];
-  "kavita.tokenkey.age".publicKeys = workstations ++ [ v-gaia-main ];
-  "forgejo_dbPass.age".publicKeys = workstations ++ [ v-gaia-main ];
+  "newt.env.age".publicKeys = workstations ++ [v-gaia-main];
+  "kavita.tokenkey.age".publicKeys = workstations ++ [v-gaia-main];
+  "forgejo_dbPass.age".publicKeys = workstations ++ [v-gaia-main];
   #etc
-  "wg0.age".publicKeys = workstations ++ [ null ];
+  "wg0.age".publicKeys = workstations ++ [null];
 }

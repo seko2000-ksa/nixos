@@ -3,26 +3,24 @@
   pkgs,
   lib,
   ...
-}:
-
-{
+}: {
   home = {
     username = "ksa";
     homeDirectory = "/home/ksa";
     stateVersion = "25.11";
   };
-  
+
   programs.home-manager.enable = true;
   programs.git = {
-      enable = true;
-      package = pkgs.git;
-      userName = "seko2000-ksa";
-      userEmail = "seko2000@gmail.com";
-      settings = {
-          core.editor = "nvim";
-      };
+    enable = true;
+    package = pkgs.git;
+    userName = "seko2000-ksa";
+    userEmail = "seko2000@gmail.com";
+    settings = {
+      core.editor = "nvim";
+    };
   };
-  
+
   #programs.starship = {
   #  enable = true;
   #  enableZshIntegration = true;

@@ -4,21 +4,19 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cfg = config.workstation.ssh;
-in
-{
+in {
   options.workstation.ssh.enable = lib.mkEnableOption "Default SSH configuration";
   config = lib.mkIf cfg.enable {
     services.openssh = {
       enable = true;
-      ports = [ 22 ];
+      ports = [22];
       settings = {
         PasswordAuthentication = false;
         KbdInteractiveAuthentication = false;
         PermitRootLogin = "no";
-        AllowUsers = [ "ksa" ];
+        AllowUsers = ["ksa"];
       };
     };
     users.users."ksa".openssh.authorizedKeys.keys = [
@@ -27,6 +25,6 @@ in
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIL6UrcHX2dRQu98j1yAO2Xo+XOJReQEXHuYIukguk8/aAAAABHNzaDo= yubikey3 mobile"
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIMHAg8btMUyPygL6n7d+aPu9surWfKncWrRf5o1pFRsxAAAABHNzaDo= yubikey4 backup"
     ];
-    networking.firewall.allowedTCPPorts = [ 22 ];
+    networking.firewall.allowedTCPPorts = [22];
   };
 }

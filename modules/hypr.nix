@@ -4,11 +4,9 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cfg = config.workstation.hypr;
-in
-{
+in {
   options.workstation.hypr.enable = lib.mkEnableOption "Hyprland-based workstation environment";
 
   config = lib.mkIf cfg.enable {
@@ -33,7 +31,7 @@ in
     };
 
     programs.hyprlock.enable = true;
-    security.pam.services.hyprlock = { };
+    security.pam.services.hyprlock = {};
 
     environment.systemPackages = with pkgs; [
       inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default

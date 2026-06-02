@@ -3,11 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.mount;
-in
-{
+in {
   options.mount = {
     games.enable = lib.mkEnableOption "Local mount for storing video game files";
     media.enable = lib.mkEnableOption "Local media mount for Jellyfin, Kavita, Immich, and Navidrome";

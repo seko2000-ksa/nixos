@@ -1,7 +1,4 @@
-{ config, ... }:
-
-{
-
+{config, ...}: {
   users = {
     groups.forgejo.gid = 990;
     users.forgejo = {
@@ -17,7 +14,11 @@
       hostPath = "/run/agenix/forgejo_dbPass.age";
       isReadOnly = true;
     };
-    config = { config, pkgs, ... }: {
+    config = {
+      config,
+      pkgs,
+      ...
+    }: {
       system.stateVersion = "25.11";
       users = {
         groups.forgejo.gid = 990;
@@ -49,13 +50,15 @@
       };
     };
   };
-  
+
   services.postgresql = {
     enable = true;
-    ensureDatabases = [ "forgejo" ];
-    ensureUsers = [{
-      name = "ksa";
-    }];
+    ensureDatabases = ["forgejo"];
+    ensureUsers = [
+      {
+        name = "ksa";
+      }
+    ];
     authentication = ''
       host forgejo ksa 127.0.0.1/32 md5
     '';

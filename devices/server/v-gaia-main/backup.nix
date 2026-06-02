@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   services.borgbackup.jobs.v-gaia-main-home = {
     paths = [
       "/home/ksa"

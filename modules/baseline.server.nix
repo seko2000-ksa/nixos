@@ -4,11 +4,9 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cfg = config.server.baseline;
-in
-{
+in {
   options.server.baseline.enable = lib.mkEnableOption "Baseline server configuration";
 
   config = lib.mkIf cfg.enable {
@@ -29,7 +27,7 @@ in
 
     nix.optimise = {
       automatic = true;
-      dates = [ "weekly" ];
+      dates = ["weekly"];
     };
 
     services.journald.extraConfig = ''
@@ -45,7 +43,7 @@ in
     };
 
     programs.zsh.enable = true;
-    environment.pathsToLink = [ "/share/zsh" ];
+    environment.pathsToLink = ["/share/zsh"];
 
     environment.systemPackages = with pkgs; [
       # tools/etc

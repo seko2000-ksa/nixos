@@ -4,15 +4,12 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cfg = config.workstation.polkit;
-in
-{
+in {
   options.workstation.polkit.enable = lib.mkEnableOption "Enable polkit";
 
   config = lib.mkIf cfg.enable {
-
     environment.systemPackages = with pkgs; [
       polkit_gnome
     ];
@@ -30,9 +27,9 @@ in
 
     systemd.user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";

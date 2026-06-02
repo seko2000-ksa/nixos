@@ -5,11 +5,9 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cfg = config.workstation.baseline;
-in
-{
+in {
   options.workstation.baseline.enable = lib.mkEnableOption "Baseline workstation configuration";
 
   config = lib.mkIf cfg.enable {
@@ -26,7 +24,7 @@ in
         efi.canTouchEfiVariables = true;
       };
       kernelPackages = pkgs.linuxPackages_latest;
-      kernelModules = [ "nvidia" ];
+      kernelModules = ["nvidia"];
     };
 
     hardware.enableAllFirmware = true;
@@ -34,7 +32,7 @@ in
       enable = true;
       enable32Bit = true;
     };
-    
+
     # Configure the NVIDIA driver
     hardware.nvidia = {
       modesetting.enable = true;
@@ -42,7 +40,7 @@ in
       open = false; # Use the open-source kernel module
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
-  
+
       prime = {
         offload = {
           enable = true;
@@ -54,7 +52,7 @@ in
       };
     };
     # Load the nvidia driver for Xorg and Wayland
-    services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
+    services.xserver.videoDrivers = ["modesetting" "nvidia"];
     services.udisks2.enable = true;
 
     networking.networkmanager = {
@@ -89,10 +87,10 @@ in
 
     time.timeZone = "Europe/Moscow";
     services.xserver.xkb = {
-      layout = "us,ru,tr";
+      layout = "us,ru";
       options = "grp:caps_toggle";
     };
-    
+
     i18n = {
       defaultLocale = "en_US.UTF-8";
       extraLocaleSettings = {
@@ -150,8 +148,8 @@ in
             "Inter"
             "Noto Sans"
           ];
-          serif = [ "Noto Serif" ];
-          monospace = [ "JetBrainsMono Nerd Font" ];
+          serif = ["Noto Serif"];
+          monospace = ["JetBrainsMono Nerd Font"];
         };
       };
       fontDir.enable = true;
@@ -160,7 +158,7 @@ in
     programs.evince.enable = true;
 
     programs.zsh.enable = true;
-    environment.pathsToLink = [ "/share/zsh" ];
+    environment.pathsToLink = ["/share/zsh"];
     programs.nh = {
       enable = true;
       clean.enable = true;
@@ -180,42 +178,42 @@ in
       };
     };
     security.rtkit.enable = true;
-    
+
     xdg.portal.enable = true;
-    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
-#systemd.user.services."network-manager-applet" = {
-#    enable = true;
-#    description = "Start the network manager applet";
-#    wantedBy = [ "default.target" ];
-#    serviceConfig.Type = "forking";
-#    serviceConfig.Restart = "always";
-#    serviceConfig.RestartSec = 2;
-#    serviceConfig.ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
-#    environment = {
-#       XDG_DATA_DIRS = "${pkgs.networkmanagerapplet}/bin/nm-applet/share";
-#    };
-#  };
+    #systemd.user.services."network-manager-applet" = {
+    #    enable = true;
+    #    description = "Start the network manager applet";
+    #    wantedBy = [ "default.target" ];
+    #    serviceConfig.Type = "forking";
+    #    serviceConfig.Restart = "always";
+    #    serviceConfig.RestartSec = 2;
+    #    serviceConfig.ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+    #    environment = {
+    #       XDG_DATA_DIRS = "${pkgs.networkmanagerapplet}/bin/nm-applet/share";
+    #    };
+    #  };
 
- #systemd.user.services.dropbox = {
- #   description = "Dropbox";
- #   wantedBy = [ "graphical-session.target" ];
- #   environment = {
- #     QT_PLUGIN_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtPluginPrefix;
- #     QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
- #   };
- #   serviceConfig = {
- #     ExecStart = "${pkgs.dropbox.out}/bin/dropbox";
- #     ExecReload = "${pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
- #     KillMode = "control-group"; # upstream recommends process
- #     Restart = "on-failure";
- #     PrivateTmp = true;
- #     ProtectSystem = "full";
- #     Nice = 10;
- #   };
- # };
+    #systemd.user.services.dropbox = {
+    #   description = "Dropbox";
+    #   wantedBy = [ "graphical-session.target" ];
+    #   environment = {
+    #     QT_PLUGIN_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtPluginPrefix;
+    #     QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
+    #   };
+    #   serviceConfig = {
+    #     ExecStart = "${pkgs.dropbox.out}/bin/dropbox";
+    #     ExecReload = "${pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
+    #     KillMode = "control-group"; # upstream recommends process
+    #     Restart = "on-failure";
+    #     PrivateTmp = true;
+    #     ProtectSystem = "full";
+    #     Nice = 10;
+    #   };
+    # };
 
- #   systemd.user.services.dropbox.enable = true;
+    #   systemd.user.services.dropbox.enable = true;
 
     system.stateVersion = "25.11";
   };

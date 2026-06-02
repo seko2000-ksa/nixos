@@ -4,14 +4,12 @@
   pkgs,
   modulesPath,
   ...
-}:
-
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
-    ../../../modules/baseline.nix 
-    ../../../modules/kde.nix 
+    ../../../modules/baseline.nix
+    ../../../modules/kde.nix
     ../../../modules/packages.nix
     ../../../modules/ssh.nix
     ../../../modules/nixvim.nix
@@ -24,17 +22,17 @@
 
   workstation = {
     baseline = {
-      enable = true;              
+      enable = true;
       packages = {
-        tools = true;             
-        dev = false;              
-        apps = false;             
+        tools = true;
+        dev = false;
+        apps = false;
       };
-    };      
-    nixvim.enable = true;         
-    kde.enable = true;           
-    yazi.enable = true;           
-    ssh.enable = true;            
+    };
+    nixvim.enable = true;
+    kde.enable = true;
+    yazi.enable = true;
+    ssh.enable = true;
     flatpak = {
       enable = true;
       onCalendar = "weekly";

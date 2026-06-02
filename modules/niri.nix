@@ -4,11 +4,9 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cfg = config.workstation.niri;
-in
-{
+in {
   options.workstation.niri.enable = lib.mkEnableOption "Niri-based workstation environment with Noctalia Shell";
 
   config = lib.mkIf cfg.enable {

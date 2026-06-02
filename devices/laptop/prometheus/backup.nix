@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   services.borgbackup.jobs.prometheus-home = {
     paths = "/home/ksa";
     exclude = [
@@ -27,7 +26,7 @@
       weekly = 4;
       monthly = 3;
     };
-    startAt = [ ];
+    startAt = [];
   };
 
   age.secrets."borg.prometheus.age" = {

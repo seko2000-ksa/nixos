@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   networking.wg-quick = {
     interfaces = {
       wg0 = {
@@ -16,11 +15,11 @@
   environment.systemPackages = with pkgs; [
     libnatpmp
   ];
- # age.secrets."wg0.age" = {
- #   file = ../../../secrets/wg0.age;
- #   path = "/run/agenix/wg0.age";
- #   owner = "ksa";
- #   group = "users";
- #   mode = "0400";
- # };
+  # age.secrets."wg0.age" = {
+  #   file = ../../../secrets/wg0.age;
+  #   path = "/run/agenix/wg0.age";
+  #   owner = "ksa";
+  #   group = "users";
+  #   mode = "0400";
+  # };
 }

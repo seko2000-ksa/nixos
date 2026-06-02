@@ -5,10 +5,9 @@
   inputs,
   nur,
   ...
-}:
-let
+}: let
   cfg = config.workstation.baseline.packages;
-  future-cursors = pkgs.callPackage ../pkgs/future-cursor.nix { };
+  future-cursors = pkgs.callPackage ../pkgs/future-cursor.nix {};
   toolsPackages = with pkgs; [
     wget
     git
@@ -29,7 +28,6 @@ let
     eza
     alacritty
     fastfetch
-    #starship
     lazygit
     nixfmt
     blueman
@@ -41,7 +39,6 @@ let
     pciutils
     file
     dig
-    #oh-my-zsh
     autojump
     screen
     openssl
@@ -56,9 +53,8 @@ let
     imv
     maestral
     maestral-gui
-    docker
-    docker-compose
-    #vpnc
+    devenv
+    secretspec
   ];
 
   devPackages = with pkgs; [
@@ -68,13 +64,8 @@ let
     rustlings
     terraform
     distrobox
-    evolution 
-    python314
-    SDL2
-    SDL2.dev
-    SDL2_image
-    SDL2_ttf
-    SDL2_mixer
+    evolution
+    pkg-config
   ];
 
   appsPackages = with pkgs; [
@@ -82,15 +73,13 @@ let
     telegram-desktop
     discord
     chromium
-    #libreoffice
-    #picard
+    libreoffice
     evince
     gnome-calculator
     evolution-ews
     katago
   ];
-in
-{
+in {
   options.workstation.baseline.packages = {
     tools = lib.mkEnableOption "CLI tools and utilities";
     dev = lib.mkEnableOption "Development tools";

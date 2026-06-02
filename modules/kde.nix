@@ -4,8 +4,7 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cfg = config.workstation.kde;
   background-package = pkgs.stdenvNoCC.mkDerivation {
     name = "background-image";
@@ -15,14 +14,13 @@ let
       cp $src $out
     '';
   };
-in
-{
+in {
   options.workstation.kde.enable = lib.mkEnableOption "KDE Plasma-based workstation environment";
 
   config = lib.mkIf cfg.enable {
     services.xserver = {
       enable = true;
-      excludePackages = [ pkgs.xterm ];
+      excludePackages = [pkgs.xterm];
     };
     services.displayManager.sddm = {
       enable = true;

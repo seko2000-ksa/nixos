@@ -3,9 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-
-{
+}: {
   programs.home-manager.enable = true;
 
   home = {
@@ -18,7 +16,7 @@
     enable = true;
     package = pkgs.git;
     settings = {
-        core.editor = "nvim";
+      core.editor = "nvim";
     };
   };
 
@@ -39,5 +37,4 @@
   xdg.configFile = {
     "starship.toml".source = ../config/starship/starship.server.toml;
   };
-
 }

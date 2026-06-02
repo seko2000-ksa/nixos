@@ -3,10 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-
-{
-
+}: {
   dconf = {
     enable = true;
     settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
@@ -49,5 +46,4 @@
     XCURSOR_SIZE = "24";
     QT_QPA_PLATFORMTHEME = "gtk3";
   };
-  
 }

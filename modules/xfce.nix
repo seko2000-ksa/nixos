@@ -4,11 +4,9 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cfg = config.workstation.xfce;
-in
-{
+in {
   options.workstation.xfce.enable = lib.mkEnableOption "XFCE-based workstation environment";
 
   config = lib.mkIf cfg.enable {

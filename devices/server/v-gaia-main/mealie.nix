@@ -1,8 +1,7 @@
-{ config, ... }:
-{
+{config, ...}: {
   containers.mealie = {
     autoStart = true;
-    config = { config, ... }: {
+    config = {config, ...}: {
       system.stateVersion = "25.11";
       users.users.mealie = {
         isSystemUser = true;

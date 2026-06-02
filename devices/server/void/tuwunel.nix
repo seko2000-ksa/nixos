@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   age.secrets."tuwunel-token" = {
     file = ../../../secrets/tuwunel-token.age;
     path = "/run/agenix/tuwunel-token";
@@ -17,7 +16,7 @@
       hostPath = "/run/agenix/tuwunel-token";
       isReadOnly = true;
     };
-    config = { config, ... }: {
+    config = {config, ...}: {
       system.stateVersion = "25.11";
       users.users.matrix-tuwunel = {
         isSystemUser = true;
@@ -32,7 +31,7 @@
           server_name = "gaialabs.me";
           allow_registration = true;
           registration_token_file = "/run/secrets/tuwunel-token";
-          address = [ "0.0.0.0" "::0" ];
+          address = ["0.0.0.0" "::0"];
         };
       };
     };
@@ -40,13 +39,20 @@
 
   containers.nginx = {
     autoStart = true;
-    config = { config, pkgs, ... }: {
+    config = {
+      config,
+      pkgs,
+      ...
+    }: {
       system.stateVersion = "25.11";
       services.nginx = {
         enable = true;
         virtualHosts."gaialabs.me" = {
           listen = [
-            { addr = "127.0.0.1"; port = 8081; }
+            {
+              addr = "127.0.0.1";
+              port = 8081;
+            }
           ];
           locations."= /.well-known/matrix/server" = {
             extraConfig = ''
@@ -84,10 +90,10 @@
     };
     dynamicConfigOptions.http = {
       services.tuwunel.loadBalancer.servers = [
-        { url = "http://localhost:6167"; }
+        {url = "http://localhost:6167";}
       ];
       services.wellknown.loadBalancer.servers = [
-        { url = "http://localhost:8081"; }
+        {url = "http://localhost:8081";}
       ];
       routers.tuwunel = {
         rule = "Host(`matrix.gaialabs.me`)";

@@ -3,9 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-
-{
+}: {
   gtk = {
     enable = true;
 
@@ -49,5 +47,4 @@
     XCURSOR_THEME = "BreezeX-RosePine-Linux";
     XCURSOR_SIZE = "24";
   };
-
 }

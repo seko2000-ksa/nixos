@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   services.borgbackup.jobs.void-home = {
     paths = [
       "/home/ksa"
