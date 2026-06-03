@@ -55,6 +55,7 @@
     maestral-gui
     devenv
     secretspec
+    tree-sitter
   ];
 
   devPackages = with pkgs; [

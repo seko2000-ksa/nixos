@@ -15,8 +15,8 @@
       ls = "eza";
       lz = "lazygit";
       yz = "yazi";
-      nrt = "sudo nixos-rebuild test --flake ~/nixos/#prometheus";
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos/#prometheus";
+      nrt = "sudo nixos-rebuild test --flake ~/nixos/#prometheus --impure";
+      nrs = "sudo nixos-rebuild switch --flake ~/nixos/#prometheus --impure";
     };
 
     initContent = lib.mkMerge [
@@ -34,7 +34,7 @@
       enable = true;
       package = pkgs.oh-my-zsh;
       custom = "/home/ksa/.oh-my-custom";
-      theme = "lcars";
+      theme = "antares";
       plugins = ["git" "z" "docker" "docker-compose" "eza" "fzf"];
     };
   };

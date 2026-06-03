@@ -9,6 +9,7 @@
 
   programs.lazyvim = {
     enable = true;
+    configFiles = /home/ksa/nixos/config/my-lazyvim-config;
 
     extras = {
       lang.nix.enable = true;
@@ -19,7 +20,7 @@
         config = ''
           return {
             "neovim/nvim-lspconfig",
-            opts = {
+            opts = {        
               servers = {
                 rust_analyzer = {
                   settings = {
