@@ -23,6 +23,18 @@ in {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
       };
+
+      plymouth = {
+      enable = false;
+      theme = "rings";
+      themePackages = with pkgs; [
+        # By default we would install all themes
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "rings" ];
+        })
+      ];
+    };
+
       kernelPackages = pkgs.linuxPackages_latest;
       kernelModules = ["nvidia"];
     };
@@ -78,7 +90,7 @@ in {
     };
 
     nix.gc = {
-      automatic = true;
+      automatic = false;
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
@@ -156,6 +168,9 @@ in {
     };
 
     programs.evince.enable = true;
+
+    programs.throne.enable = true;
+    programs.throne.tunMode.enable = true;
 
     programs.zsh.enable = true;
     environment.pathsToLink = ["/share/zsh"];

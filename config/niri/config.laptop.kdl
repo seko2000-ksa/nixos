@@ -60,8 +60,6 @@ layout {
     }
 }
 
-spawn-at-startup "chromium-browser"
-spawn-at-startup "Telegram"
 spawn-at-startup "noctalia-shell"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "alacritty"

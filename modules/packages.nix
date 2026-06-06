@@ -79,6 +79,10 @@
     gnome-calculator
     evolution-ews
     katago
+    neovim
+    nixd
+    alejandra
+    luaPackages.jsregexp
   ];
 in {
   options.workstation.baseline.packages = {

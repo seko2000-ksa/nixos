@@ -141,7 +141,7 @@
           ./home/common.nix
           ./home/zsh.nix
           ./home/niri.nix
-          ./home/lazyvim.nix
+          #./home/lazyvim.nix
         ];
       };
 
